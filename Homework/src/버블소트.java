@@ -9,7 +9,7 @@ import java.util.Random;
 
 public class 버블소트 {
    public static void main(String[] args) {
-      int number[] = new int[30];
+      int number[] = new int[10];
       Random r = new Random();
       
       for (int i = 0; i < number.length; i++) {
@@ -27,6 +27,6 @@ public class 버블소트 {
                } 
             }
          }
-         System.out.println("정렬 후 : " + Arrays.toString(number));
+         System.out.println("정렬후 : " + Arrays.toString(number));
    }
 }
