@@ -16,5 +16,4 @@ public class Change {
 			System.out.println(price / 500);
 		}
 	}
-
 }
