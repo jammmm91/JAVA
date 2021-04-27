@@ -11,7 +11,6 @@ public class Main {
 
 		for (int i = 0; i < 9999; i++) {
 
-			System.out.println();
 			System.out.println("방명록을 작성해주세요");
 			System.out.println("1. 방명록작성");
 			System.out.println("2. 방문자확인");
