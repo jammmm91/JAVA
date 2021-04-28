@@ -8,6 +8,8 @@ import java.util.Scanner;
 // 거스름돈이 n인 경우, 최소 동전의 개수가 몇 개인지 
 // 알려주는 프로그램을 작성하시오.
 
+//
+
 public class ChangeCoin {
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
@@ -16,29 +18,16 @@ public class ChangeCoin {
 
 		if (input % 5 == 0) {
 			System.out.println(input / 5);
-		} else {
-			while (true) {
 
-				if (input < 0) {
-					System.out.println(-1);
-					break;
-				}
+		} else if (input == 1 || input == 3) {
+			System.out.println(-1);
 
-				if (input == 0) {
-					System.out.println(numberOfCoin);
-					break;
-				}
-
-				input = input - 2;
-				numberOfCoin++;
-
-				if (input % 5 == 0) {
-					numberOfCoin += input / 5;
-					System.out.println(numberOfCoin);
-					break;
-				}
-			}
+		} else if (input % 5 == 1 || input % 5 == 3) {
+			numberOfCoin = input / 5 - 1;
+			input = input - (numberOfCoin * 5);
+			numberOfCoin = numberOfCoin + (input / 2);
+			System.out.println(numberOfCoin);
 		}
-		sc.close();
+
 	}
 }

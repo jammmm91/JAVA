@@ -11,9 +11,19 @@ public class Change {
 	public static void main(String[] args) {
 		Scanner s = new Scanner(System.in);
 		int price = s.nextInt();
-		
-		if (price % 500 == 0) {
-			System.out.println(price / 500);
+		int change = 1000 - price;
+		int arr[] = { 500, 100, 50, 10, 5, 1 };
+		int count = 0;
+
+		for (int i = 0; i < 6; i++) {
+			if (change >= arr[i]) {
+				count = count + change / arr[i];
+				change = change % arr[i];
+			} else if (change == 0) {
+				break;
+			}
 		}
+		System.out.println(count);
+
 	}
 }

@@ -13,22 +13,37 @@ import java.util.Scanner;
 
 //#출력#
 //첫째 줄에 K원을 만드는데 필요한 동전 개수의 최솟값을 출력한다.
-
+//1,5,10,50,100,500,1000
+//8880
+//1000=8
+//880
+//500=1
+//380
+//100=3
+//50=1
+//30
+//10=3
+//0
+//[1,5,10,50,100,500,1000]
 public class Coin {
 	public static void main(String[] args) throws Exception {
 		Scanner sc = new Scanner(System.in);
+		
+		System.out.println("이거");
 
 		int N = sc.nextInt();
 		int M = sc.nextInt();
 		int count = 0;
-		int[] arr = new int[N];
-		for (int i = 0; i < N; i++) {
-			arr[i] = sc.nextInt();
-		}
+		int[] arr = {1,5,10,50,100,500,1000};
+//		for (int i = 0; i < N; i++) {
+//			arr[i] = sc.nextInt();
+//		}
 		for (int i = N - 1; i >= 0; i--) {
 			if (M >= arr[i]) {
 				count = count + M / arr[i];
 				M = M % arr[i];
+			}else if (M==0) {
+				break;
 			}
 		}
 		System.out.println(count);
