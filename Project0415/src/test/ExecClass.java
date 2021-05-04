@@ -56,7 +56,7 @@ public class ExecClass {
 		
 		// 순위 세팅
 		for (int i = 0; i < class1.length; i++) {
-			if (i > 1 && class1[i - 1].totalScore == class1[i].totalScore) {
+			if (i > 0 && class1[i - 1].totalScore == class1[i].totalScore) {
 				class1[i].rank = class1[i - 1].rank;
 			} else {
 				class1[i].rank = i + 1;

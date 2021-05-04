@@ -4,34 +4,36 @@ import java.io.InputStreamReader;
 
 public class Test5 {
 	public static void main(String[] args) throws IOException {
-		// 입력처리
+		// 최댓값을 구하고 최솟값을 갱신하자.
+
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		int studentNum = Integer.parseInt(br.readLine());
+
+		int people = Integer.parseInt(br.readLine());
+
+		// 100명일 때 최대로 낭비하는 경우는 45*3.
+		int bus45cnt = (people / 45) + 1;
+		int bus25cnt = (people / 25) + 1;
+
+		int maxPrice = 45 * bus45cnt;
+
+		// 결과값을 담을 변수 bus45, bus25
+
 		int bus45 = 0;
 		int bus25 = 0;
+		int sum = 0;
+		// 1을 더했으니 작거나 같은 범위로 가야한다.
 
-		// 로직구현
-		if (studentNum % 25 == 0) {
-			bus25 = studentNum / 25;
-			System.out.println(bus45 + " " + bus25);
-			return; // return을 안쓰면 25로 나누어 떨어져도 밑이 실행된다.
-		}
-		
-		while (true) {
-			if (studentNum >= 45) {
-				studentNum -= 45;
-				bus45++;
-
-				if (studentNum % 25 == 0) {
-					bus25 = studentNum / 25;
-					System.out.println(bus45 + " " + bus25);
-					break;
+		for (int i = 0; i <= bus45cnt; i++) {
+			for (int j = 0; j <= bus25cnt; j++) {
+				sum = 45 * i + 25 * j;
+				if (sum >= people && sum <= maxPrice) {
+					maxPrice = sum;
+					bus45 = i;
+					bus25 = j;
 				}
-			} else {
-				int A = (studentNum < 25) ? bus25++ : bus45++; // 삼항연산자 이용
-				System.out.println(bus45 + " " + bus25);
-				break;
+
 			}
 		}
+		System.out.println("" + bus45 + " " + bus25);
 	}
 }
