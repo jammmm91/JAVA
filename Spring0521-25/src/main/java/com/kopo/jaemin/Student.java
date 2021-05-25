@@ -3,22 +3,22 @@ package com.kopo.jaemin;
 public class Student {
 	int idx;
 	String name;
-	int middleScore;
-	int finalScore;
+	double middleScore;
+	double finalScore;
 	String created;
 	
 	Student() {
 		
 	}
 	
-	Student(String name, int middleScore, int finalScore, String created) {
+	Student(String name, double middleScore, double finalScore, String created) {
 		this.name = name;
 		this.middleScore = middleScore;
 		this.finalScore = finalScore;
 		this.created = created;
 	}
 	
-	Student(int idx, String name, int middleScore, int finalScore, String created) {
+	Student(int idx, String name, double middleScore, double finalScore, String created) {
 		this.idx = idx;
 		this.name = name;
 		this.middleScore = middleScore;
