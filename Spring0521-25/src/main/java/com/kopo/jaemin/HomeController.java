@@ -1,7 +1,5 @@
 package com.kopo.jaemin;
 
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Locale;
 
 import org.slf4j.Logger;

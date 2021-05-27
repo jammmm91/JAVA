@@ -38,8 +38,7 @@ public class UserDB {
 			SQLiteConfig config = new SQLiteConfig();
 			Connection connection = DriverManager.getConnection("jdbc:sqlite:/" + "c:/tomcat/user.db", config.toProperties());
 		//use 
-			String query = "INSERT INTO student (name, middleScore, finalScore, created) VALUES ('"
-					+ name + "'," + middleScore + ", " + finalScore + ", date('now'))";
+			String query = "INSERT INTO student (name, middleScore, finalScore, created) VALUES ('" + name + "'," + middleScore + ", " + finalScore + ", date('now'))";
 			Statement statement = connection.createStatement();
 			int result = statement.executeUpdate(query);
 			
