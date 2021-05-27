@@ -1,0 +1,56 @@
+.wrap {
+  width: 90%;
+  margin: 0 auto;
+  padding: 20px 0px;
+}
+
+form {
+  width: 80%;
+  box-sizing: border-box;
+  padding: 20px;
+  background: #f1f1f1;
+  border-radius: 10px 0px;
+}
+
+input {
+  width: 60%;
+  line-height: 2em;
+  height: 2em;
+}
+
+label {
+  width: 100%;
+  display: inline-block;
+  margin: 10px 0px;
+  text-align: center;
+}
+
+input[type='submit'] {
+  width: 30%;
+  display: inline-block;
+  margin: auto 240px;
+  background: #918191;
+  color: #fff;
+  border: none;
+  padding: 10px;
+  height: 3em;
+  padding: 5px;
+  width: 30%;
+  font-size: 15px;
+}
+
+a {
+  display: inline-block;
+  width: 10%;
+  box-sizing: border-box;
+
+  padding: 10px 10px;
+  
+  border-radius: 5px;
+  margin: 10px 0px;
+  background: #f9f9f9;
+  border: 1px solid #a1a1a1;
+  text-align: center;
+  text-decoration: none;
+  font: bold 15px "돋움"
+}
