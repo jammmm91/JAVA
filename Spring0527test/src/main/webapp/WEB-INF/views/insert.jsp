@@ -14,16 +14,16 @@
     <section class="wrap">
       <form action="insert_action">
       	<input type="hidden" name="idx" />
-        <label> 이름입력  
+        <label> NAME
           <input type="text" name="staff_name" value="" />
         </label>
-        <label> 성별입력  
+        <label> SEX  
           <input type="text" name="staff_sex" value="" />
         </label>
-        <label> 주소입력  
+        <label> ADDRESS  
           <input type="text" name="staff_address" value="" />
         </label>
-        <label> 부서입력  
+        <label> DEPARTMENT  
           <input type="text" name="staff_department" value="" />
         </label>
         <input type="submit" value="Input" /></br>

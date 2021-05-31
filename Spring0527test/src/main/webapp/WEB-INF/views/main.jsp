@@ -13,10 +13,10 @@
   <body>
     <section class="wrap">
 	    
-	    <a href="list">직원명단확인</a>
-	    <a href="insert">직원정보입력</a>
-	    <a href="create">테이블생성</a>
-	    
+	    <a href="list">Staff list</a>
+	    <a href="insert">Insert staff info</a>
+	    <a href="search">Search staff</a>
+	    <a href="create">Create table</a>
     </section>
 
   </body>

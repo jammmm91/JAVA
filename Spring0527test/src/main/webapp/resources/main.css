@@ -10,6 +10,7 @@
 
   /* 테두리 */
   border: 1px solid #ccc;
+  background-color: lightgray;
 }
 
 a {
@@ -29,7 +30,9 @@ a {
   border: 1px solid #a1a1a1;
   text-align: center;
   text-decoration: none;
-  font-weight: bold;
+  font-weight: none;
+  background-color: white;
+  font: bold 15px "돋움"
 }
 
 a:hover, a:active {

@@ -50,7 +50,7 @@ public class HomeController {
 					
 		UserDB db = new UserDB();
 		db.insertData(name, sex, address, department);	
-		model.addAttribute("mg", "직원정보가 DB에 저장되었습니다");
+		model.addAttribute("mg", "Employee information has been saved in DB");
 		
 		return "message";
 	}
@@ -82,7 +82,7 @@ public class HomeController {
 		
 		db.updateData(idx, name, sex, address, department);
 
-		model.addAttribute("mg", "직원정보가 수정되었습니다.");
+		model.addAttribute("mg", "Employee information has been modified");
 		return "message";
 	}
 	
@@ -91,7 +91,7 @@ public class HomeController {
 		UserDB db = new UserDB();
 				
 		db.deleteData(idx);
-		model.addAttribute("mg", "직원정보가 삭제되었습니다");
+		model.addAttribute("mg", "Employee information has been deleted");
 		return "message";
 	}
 	
@@ -99,12 +99,29 @@ public class HomeController {
 	public String create(Locale locale, Model model) {
 		UserDB db = new UserDB();
 		db.createTable();	
-		model.addAttribute("mg", "직원정보 테이블이 생성되었습니다");
+		model.addAttribute("mg", "Employee information table created");
 		return "message";
 	}
 	
 	@RequestMapping(value = "/message", method = RequestMethod.GET)
 	public String messageMethod(Locale locale, Model model) {
 		return "message";
+	}
+	
+	@RequestMapping(value = "/search", method = RequestMethod.GET)
+	public String search(Locale locale, Model model) {
+		
+		return "search";
+	}
+	
+	@RequestMapping(value = "/search_action", method = RequestMethod.GET)
+	public String searchAction(Locale locale, Model model
+			, @RequestParam("staff_name") String name) {
+		UserDB db = new UserDB();
+		String htmlString = db.searchData(name);
+		
+		model.addAttribute("list", htmlString);
+
+		return "list";
 	}
 }

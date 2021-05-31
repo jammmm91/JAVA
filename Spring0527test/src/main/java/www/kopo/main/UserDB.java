@@ -160,4 +160,44 @@ public class UserDB {
 			e.printStackTrace();
 		}
 	}
+	
+//	◆◆◆데이터검색◆◆◆
+	public String searchData(String name) {
+		String resultString = "";
+		try {
+			// open
+			Class.forName("org.sqlite.JDBC");
+			SQLiteConfig config = new SQLiteConfig();
+			Connection connection = DriverManager.getConnection("jdbc:sqlite:/" + "c:/tomcat/staff.db",	config.toProperties());
+			// use
+			String query = "SELECT*FROM staff WHERE name=?";
+			PreparedStatement preparedStatement = connection.prepareStatement(query);
+			preparedStatement.setString(1, name);
+			ResultSet resultSet = preparedStatement.executeQuery();
+			System.out.println(resultSet);
+			if (resultSet.next()) {
+				int idx = resultSet.getInt("idx");
+				String sex = resultSet.getString("sex");
+				String address = resultSet.getString("address");
+				String department = resultSet.getString("department");
+				
+				resultString = resultString + "<tr>";
+				resultString = resultString + "<td>" + idx + "</td><td>" + name + "</td><td>" + sex
+						+ "</td><td>" + address + "</td><td>" + department 
+						+ "</td><td><a href='update?idx=" + idx + "'>수정하기</a></td>" 
+						+ "</td><td><a href='delete?idx=" + idx + "'>삭제하기</a></td>"; 
+				resultString = resultString + "</tr>";
+
+				resultString = resultString + "</tr>";
+
+			}
+
+			preparedStatement.close();
+			// close
+			connection.close();
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return resultString;
+	}
 }

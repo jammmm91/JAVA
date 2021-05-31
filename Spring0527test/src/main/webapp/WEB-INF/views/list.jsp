@@ -15,7 +15,7 @@
         <table>
             <thead>
                 <tr>
-                    <th>idx</th><th>이름</th><th>성별</th><th>주소</th><th>소속부서</th><th>수정</th><th>삭제</th>
+                    <th>idx</th><th>NAME</th><th>SEX</th><th>ADDRESS</th><th>DEPARTMENT</th><th>CHANGE</th><th>DELETE</th>
                 </tr>
             </thead>
             <tbody>
