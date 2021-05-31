@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  * Handles requests for the application home page.
@@ -33,7 +34,7 @@ public class HomeController {
 		
 		model.addAttribute("serverTime", formattedDate );
 		
-		return "home";
+		return "main";
 	}
 	
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
@@ -52,8 +53,16 @@ public class HomeController {
 	}
 	
 	@RequestMapping(value = "/insert_action", method = RequestMethod.GET)
-	public String insertAction(Locale locale, Model model) {
-		model.addAttribute("message", "데이터가 입력되었습니다");				
+	public String insertAction(Locale locale, Model model
+			, @RequestParam("name") String name
+			, @RequestParam("middle") String middleString
+			, @RequestParam("final") String finalString) {
+		int middleNumber = Integer.parseInt(middleString);
+		int finalNumber = Integer.parseInt(finalString);
+		
+		DBCommon<Student> db = new DBCommon<Student>("c:/tomcat/scoreTable.db", "student");
+		db.insertData(new Student(name, middleNumber, finalNumber));
+		model.addAttribute("message", "DB에 저장완료!");				
 		
 		return "messagePage";
 	}

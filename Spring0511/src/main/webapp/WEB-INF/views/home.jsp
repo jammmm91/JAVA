@@ -6,8 +6,7 @@
 </head>
 <body>
 <h1>
-	Hello world!????show me the money
-	black sheep wall
+	Hello world!
 </h1>
 
 <P>  The time on the server is ${serverTime}. </P>

@@ -5,7 +5,7 @@
 }
 
 form {
-  width: 80%;
+  width: 100%;
   box-sizing: border-box;
   padding: 20px;
   background: #f1f1f1;
@@ -22,33 +22,15 @@ label {
   width: 100%;
   display: inline-block;
   margin: 10px 0px;
-  text-align: center;
 }
 
 input[type='submit'] {
-  width: 30%;
+  width: 90%;
   display: inline-block;
-  margin: auto 150px;
+  margin: 10px;
   background: #918191;
   color: #fff;
   border: none;
   padding: 10px;
   height: 3em;
-  padding: 5px;
-  width: 30%;
-  font-size: 15px;
-}
-
-a {
-  display: inline-block;
-  width: 15%;
-  box-sizing: border-box;
-  padding: 10px 10px;
-  border-radius: 5px;
-  margin: 10px 0px;
-  background: #f9f9f9;
-  border: 1px solid #a1a1a1;
-  text-align: center;
-  text-decoration: none;
-  font: bold 15px "돋움"
 }
