@@ -1,0 +1,40 @@
+.wrap {
+  width: 90%;
+  margin: 0 auto;
+  padding: 20px 0px;
+}
+
+table{
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th {
+  text-align: center;
+  background: #999;
+  color: #fff;
+  padding: 5px 10px;
+  border: 1px solid #f1f1f1;
+  font: bold 15px "돋움"
+}
+
+td {
+  text-align: center;
+  padding: 5px 10px;
+  border: 1px solid #f1f1f1;
+  font: bold 15px "돋움"
+}
+
+a {
+  display: inline-block;
+  width: 30%;
+  box-sizing: border-box;
+  padding: 5px 5px;
+  border-radius: 15px;
+  margin: 10px 0px;
+  background: #f9f9f9;
+  border: 1px solid #a1a1a1;
+  text-align: center;
+  text-decoration: none;
+  font: bold 15px "돋움"
+}
