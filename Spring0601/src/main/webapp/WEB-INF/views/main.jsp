@@ -13,6 +13,7 @@
   <body>
     <section class="wrap">
 	    
+	    <a href="login">LOGIN</a>
 	    <a href="insert">JOIN</a>
 	    <a href="list">User list</a>
 	    <a href="search">Search user</a>

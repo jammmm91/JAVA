@@ -61,6 +61,17 @@ public class UserDB {
 //			Statement statement = connection.createStatement();
 //			int result = statement.executeUpdate(query);
 			
+//			아이디 중복 검사
+			String query1 = "SELECT * FROM user WHERE id=?";
+			PreparedStatement preparedStatement1 = connection.prepareStatement(query1);
+			ResultSet resultset = preparedStatement1.executeQuery();
+			if (resultset.next()) {
+				preparedStatement1.close();
+				connection.close();
+				return false;
+			}
+			preparedStatement1.close();			
+			
 			user.pwd = sha256(user.pwd);
 			
 			String query = "INSERT INTO user (id, pwd, name, birthday, address, created, updated)"
@@ -127,7 +138,7 @@ public class UserDB {
 				String birthday = resultSet.getString("birthday");
 				resultString = resultString + "<tr>";
 				resultString = resultString + "<td>" + idx + "</td><td>" + id + "</td><td>" + name
-						+ "</td><td>" + birthday + "</td><td><a href='update?idx=" + idx + "'>CLICK</a></td>";
+						+ "</td><td>" + birthday + "</td><td><a href='update?idx=" + idx + "'>✔</td>";
 				resultString = resultString + "</tr>";
 			}
 			preparedStatement.close();
@@ -225,14 +236,14 @@ public class UserDB {
 //}
 	
 //	◆◆◆데이터삭제◆◆◆
-	public void deleteData (int idx) {
+	public void deleteDB (int idx) {
 		try {
 			// open
 			Class.forName("org.sqlite.JDBC");
 			SQLiteConfig config = new SQLiteConfig();
-			Connection connection = DriverManager.getConnection("jdbc:sqlite:/" + "c:/tomcat/staff.db", config.toProperties());			
+			Connection connection = DriverManager.getConnection("jdbc:sqlite:/" + "c:/tomcat/user.db", config.toProperties());			
 
-			String query = "DELETE FROM staff WHERE idx=?";
+			String query = "DELETE FROM user WHERE idx=?";
 			PreparedStatement preparedStatement = connection.prepareStatement(query);
 			
 			preparedStatement.setInt(1, idx);
@@ -247,30 +258,30 @@ public class UserDB {
 	}
 	
 //	◆◆◆데이터검색◆◆◆
-	public String searchData(String name) {
+	public String searchDB(String userid) {
 		String resultString = "";
 		try {
 			// open
 			Class.forName("org.sqlite.JDBC");
 			SQLiteConfig config = new SQLiteConfig();
-			Connection connection = DriverManager.getConnection("jdbc:sqlite:/" + "c:/tomcat/staff.db",	config.toProperties());
+			Connection connection = DriverManager.getConnection("jdbc:sqlite:/" + "c:/tomcat/user.db",	config.toProperties());
 			// use
-			String query = "SELECT*FROM staff WHERE name=?";
+			String query = "SELECT*FROM user WHERE name=?";
 			PreparedStatement preparedStatement = connection.prepareStatement(query);
-			preparedStatement.setString(1, name);
+			preparedStatement.setString(1, userid);
 			ResultSet resultSet = preparedStatement.executeQuery();
 			System.out.println(resultSet);
 			if (resultSet.next()) {
 				int idx = resultSet.getInt("idx");
-				String sex = resultSet.getString("sex");
+				String id = resultSet.getString("id");
+				String name = resultSet.getString("name");
 				String address = resultSet.getString("address");
-				String department = resultSet.getString("department");
+				String birthday = resultSet.getString("birthday");
 				
-				resultString = resultString + "<tr>";
-				resultString = resultString + "<td>" + idx + "</td><td>" + name + "</td><td>" + sex
-						+ "</td><td>" + address + "</td><td>" + department 
-						+ "</td><td><a href='update?idx=" + idx + "'>수정하기</a></td>" 
-						+ "</td><td><a href='delete?idx=" + idx + "'>삭제하기</a></td>"; 
+//				resultString = resultString + "<tr>";
+				resultString = resultString + "<td>" + idx + "</td><td>" + id + "</td><td>" + name + "</td><td>" + birthday
+						+ "</td><td><a href='update?idx=" + idx + "'>✔</td>";
+//						+ "</td><td><a href='delete?idx=" + idx + "'>삭제하기</a></td>"; 
 				resultString = resultString + "</tr>";
 
 				resultString = resultString + "</tr>";
@@ -284,5 +295,37 @@ public class UserDB {
 			// TODO: handle exception
 		}
 		return resultString;
+	}
+	
+//	로그인
+	public boolean loginDB(String id, String pwd) {
+		//open
+		try {
+			Class.forName("org.sqlite.JDBC");
+			SQLiteConfig config = new SQLiteConfig();
+			Connection connection = DriverManager.getConnection("jdbc:sqlite:/" + "c:/tomcat/user.db", config.toProperties());
+		//use 
+			
+			pwd = this.sha256(pwd);
+			
+			String query = "SELECT * FROM user id=? AND pwd=?";
+			PreparedStatement preparedStatement = connection.prepareStatement(query);
+			preparedStatement.setString(1, id);
+			preparedStatement.setString(2, pwd);
+			ResultSet resultset = 
+			
+			if (result < 1) {
+				return false;
+			}
+			preparedStatement.close();			
+			
+			// close
+			connection.close();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+		return true;
 	}
 }
