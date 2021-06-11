@@ -21,6 +21,7 @@ nav ul {
 	padding: 0;
 	text-align: center;
 }
+
 /* 메뉴들이 나란히 나타날 수 있게 해주는 기능 */
 nav ul li {
 	display: inline-block;
