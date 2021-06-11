@@ -35,7 +35,6 @@ public class HomeController {
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public String create(Locale locale, Model model) {
 		UserDB userDB = new UserDB();
-		userDB.createDB();
 		boolean isSuccess = userDB.createDB();
 		if (isSuccess) {
 			model.addAttribute("m1", "테이블이 생성되었습니다.");
