@@ -1,0 +1,78 @@
+header {
+    padding-top: 30px;
+    padding-bottom: 20px;
+    text-align: center;
+    align-content: center;
+}
+
+.header-wrap a {
+	font-size: 3em;
+  background: #11111;
+  text-align: center;
+  color: #443252;
+}
+
+/* 네비게이션 바에 목록 구성하기s */
+nav ul {
+    width: 100%;
+    /* background-color: rgba(10, 42, 39, 0.983); */
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+		  text-align: center;
+}
+/* 메뉴들이 나란히 나타날 수 있게 해주는 기능 */
+nav ul li {
+    display: inline-block;
+}
+
+/* 각 메뉴별로 공간이 나눠져 있는데, 각  */
+.menu{
+	color: white;
+	 padding: 10px;
+	 font-size: 16px;
+	 cursor: pointer;
+}
+.menu a {
+  text-decoration: none;
+  		color:#333;
+}
+
+.menu:hover:not(.home){
+    background-color: #f6f6e9;
+    color: white;
+}
+
+/* div태그 메인 공간에 색깔 넣어둠 */
+.bottom_background {
+	margin: 30px;
+	padding: 10px 10px;
+	height: auto;
+	text-align: center;
+	background: #f9f3e6;
+}
+
+/* 추후에 여기 지우셈 - insert부분태그 */
+form {
+  width: 70%;
+  height: 70%;
+  background: #f5f5f5;
+  display: inline-block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+table {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+table thead input {
+  width: 500px;
+  height: 50px
+}
+
+table tbody input {
+  width: 500px;
+  height: 500px;
+}

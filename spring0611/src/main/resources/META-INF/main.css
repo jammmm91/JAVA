@@ -1,0 +1,47 @@
+header {
+    padding-top: 30px;
+    padding-bottom: 20px;
+    text-align: center;
+    align-content: center;
+}
+
+.header-wrap a {
+	font-size: 3em;
+  background: #11111;
+  text-align: center;
+  color: #443252;
+}
+
+/* 네비게이션 바에 목록 구성하기s */
+nav ul {
+    width: 100%;
+    /* background-color: rgba(10, 42, 39, 0.983); */
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+		  text-align: center;
+}
+/* 메뉴들이 나란히 나타날 수 있게 해주는 기능 */
+nav ul li {
+    display: inline-block;
+}
+
+/* 각 메뉴별로 공간이 나눠져 있는데, 각 공간의 사이즈 */
+.menu{
+	color: white;
+	 padding: 10px;
+	 font-size: 16px;
+	 cursor: pointer;
+}
+
+.menu a {
+	color: #0c2d45;
+padding: 0px 35px;
+text-decoration: none;
+display: block;
+}
+
+.menu:hover:not(.home){
+    background-color: #f6f6e9;
+    color: white;
+}
