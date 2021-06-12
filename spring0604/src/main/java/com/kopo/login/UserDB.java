@@ -81,7 +81,8 @@ public class UserDB {
 		return true;
 	}
 
-	public boolean loginDB(String id, String pwd) { // 로그인
+	// 로그인
+	public boolean loginDB(String id, String pwd) { 
 		try {
 			Class.forName("org.sqlite.JDBC");
 			SQLiteConfig config = new SQLiteConfig();
@@ -89,6 +90,7 @@ public class UserDB {
 
 			pwd = this.sha256(pwd);// password hash sha256 -> 주로사용
 			
+//			id, pwd 있는지 없는지 검사
 			String query = "SELECT * FROM users WHERE id=? AND pwd=?";
 			PreparedStatement preparedStatement = connection.prepareStatement(query);
 			preparedStatement.setString(1, id);
@@ -206,7 +208,8 @@ public class UserDB {
 //	}
 
 
-	public int verificationData(String id, String password) {// 수정을 위한 검증 
+	// 수정을 위한 검증 
+	public int verificationData(String id, String password) {
 		int returnIdx = -1 ;
 		try {
 			Class.forName("org.sqlite.JDBC");

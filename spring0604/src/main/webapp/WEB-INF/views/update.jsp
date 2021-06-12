@@ -17,7 +17,7 @@
         <br>
             <label> ID 
              <br> 
-                <input type="text" name="id" placeholder="아이디 변경 불가. 기존의 아이디를 입력하세요."/>
+                <input type="text" name="id"/>
             </label>
             <label> PWD 
              <br> 

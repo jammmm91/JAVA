@@ -18,7 +18,7 @@
              </label>
               <label> PLEASE ENTER YOUR PASSWORD
              <br>
-             <input type="text" name="pwd" placeholder="PWD" />
+             <input type="password" name="pwd" placeholder="PWD" />
              </label>
             <input type="submit" value="입력 완료" />
         </form>

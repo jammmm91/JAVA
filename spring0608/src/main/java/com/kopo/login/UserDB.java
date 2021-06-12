@@ -12,7 +12,9 @@ import org.sqlite.SQLiteConfig;
 import com.kopo.login.Member;
 
 public class UserDB {
-	public boolean createDB() { // 테이블 생성
+	
+	// 테이블 생성
+	public boolean createDB() { 
 		try {
 			// open
 			Class.forName("org.sqlite.JDBC");
@@ -35,7 +37,8 @@ public class UserDB {
 		return true;
 	}
 
-	public boolean insertDB(Member member) { // 회원정보 삽입
+	// 회원정보 삽입
+	public boolean insertDB(Member member) { 
 		try {
 			Class.forName("org.sqlite.JDBC");
 			SQLiteConfig config = new SQLiteConfig();
@@ -53,7 +56,8 @@ public class UserDB {
 			}
 			preparedStatement1.close();			
 			
-			member.pwd = sha256(member.pwd);// password hash sha256 -> 주로사용
+			// password hash sha256 -> 주로사용
+			member.pwd = sha256(member.pwd);
 
 			String query = "INSERT INTO users (id, pwd, name, birthday, address, created, updated) VALUES (?,?,?,?,?,?,?)";
 			PreparedStatement preparedStatement = connection.prepareStatement(query);
@@ -81,13 +85,15 @@ public class UserDB {
 		return true;
 	}
 
-	public boolean loginDB(String id, String pwd) { // 로그인
+	// 로그인
+	public boolean loginDB(String id, String pwd) { 
 		try {
 			Class.forName("org.sqlite.JDBC");
 			SQLiteConfig config = new SQLiteConfig();
 			Connection connection = DriverManager.getConnection("jdbc:sqlite:/" + "c:\\tomcat\\user.db", config.toProperties());
 
-			pwd = this.sha256(pwd);// password hash sha256 -> 주로사용
+			// password hash sha256 -> 주로사용
+			pwd = this.sha256(pwd);
 			
 			String query = "SELECT * FROM users WHERE id=? AND pwd=?";
 			PreparedStatement preparedStatement = connection.prepareStatement(query);
@@ -111,7 +117,8 @@ public class UserDB {
 		
 	}
 
-	public int loginDB2(String id, String pwd) { // 로그인
+	// 로그인
+	public int loginDB2(String id, String pwd) { 
 		try {
 			Class.forName("org.sqlite.JDBC");
 			SQLiteConfig config = new SQLiteConfig();
@@ -142,7 +149,8 @@ public class UserDB {
 		
 	}
 	
-	public String selectData() { // 회원정보 전체조회
+	// 회원정보 전체조회
+	public String selectData() { 
 		String resultString = "";
 		try {
 			// open
@@ -183,7 +191,8 @@ public class UserDB {
 		return resultString;
 	}
 	
-	public Member detailsData(int idx) { // 특정회원 조회
+	// 특정회원 조회
+	public Member detailsData(int idx) { 
 		Member resultData = new Member();
 		try {
 			Class.forName("org.sqlite.JDBC");
@@ -240,7 +249,8 @@ public class UserDB {
 //	}
 
 
-	public int verificationData(String id, String password) {// 수정을 위한 검증 
+	// 수정을 위한 검증 
+	public int verificationData(String id, String password) {
 		int returnIdx = -1 ;
 		try {
 			Class.forName("org.sqlite.JDBC");
@@ -337,7 +347,8 @@ public class UserDB {
 		}
 	}
 	
-	public boolean deleteData(int idx) { // 회원정보 삭제
+	// 회원정보 삭제
+	public boolean deleteData(int idx) { 
 		try {
 			Class.forName("org.sqlite.JDBC");
 			SQLiteConfig config = new SQLiteConfig();
@@ -362,7 +373,8 @@ public class UserDB {
 		}
 	}
 
-	public String searchData(String InputId) { // 회원정보 검색
+	// 회원정보 검색
+	public String searchData(String InputId) { 
 		Member resultData = new Member();
 		String resultString = "";
 		try {
@@ -404,7 +416,8 @@ public class UserDB {
 		return resultString;
 	}
 
-	public String sha256(String msg) { // 비밀번호 암호화
+	// 비밀번호 암호화
+	public String sha256(String msg) { 
 		try {
 			MessageDigest md = MessageDigest.getInstance("SHA-256");
 			md.update(msg.getBytes());
@@ -420,7 +433,8 @@ public class UserDB {
 		}
 	}
 	
-	public Member searchDetails(String id, String pwd) { // 특정회원 조회
+	// 특정회원 조회
+	public Member searchDetails(String id, String pwd) { 
 		Member resultData = new Member();
 		try {
 			Class.forName("org.sqlite.JDBC");
@@ -449,5 +463,4 @@ public class UserDB {
 		
 		return resultData;
 	}
-	
 }

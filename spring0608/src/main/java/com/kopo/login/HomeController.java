@@ -57,7 +57,6 @@ public class HomeController {
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public String create(Locale locale, Model model) {
 		UserDB userDB = new UserDB();
-		userDB.createDB();
 		boolean isSuccess = userDB.createDB();
 		if (isSuccess) {
 			model.addAttribute("m1", "테이블이 생성되었습니다.");
@@ -74,11 +73,13 @@ public class HomeController {
 
 	@RequestMapping(value = "/insert_action", method = RequestMethod.POST)
 	public String insertAction(HttpServletRequest request, Locale locale, Model model) {
+//		post방식에서 한글깨질 때 사용하는 방법
 		try {
 			request.setCharacterEncoding("utf-8");
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
 		}
+//		setCharacterEncoding을 하는 경우에는 아래와 같은 방식으로 써 줘야 함
 		String id = request.getParameter("id");
 		String pwd = request.getParameter("pwd");
 		String name = request.getParameter("name");

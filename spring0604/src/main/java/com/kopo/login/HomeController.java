@@ -194,6 +194,8 @@ public class HomeController {
 		if (isSuccess) {
 			HttpSession session = request.getSession();
 			session.setAttribute("is_login", true);
+			
+//			redirect = 페이지를 넘겨줄 때 사용한다
 			return "redirect:/";
 		}
 		return "redirect:/login";
