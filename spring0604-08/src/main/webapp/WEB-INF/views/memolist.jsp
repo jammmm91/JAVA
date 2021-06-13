@@ -4,25 +4,25 @@
 <head>
     <meta charset='utf-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <title>목록</title>
+    <title>메모작성</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <link rel='stylesheet' type='text/css' media='screen' href='${pageContext.request.contextPath}/resources/list.css'>
+    <link rel='stylesheet' type='text/css' media='screen' href='${pageContext.request.contextPath}/resources/memolist.css'>
 </head>
 <body>
     <section class="wrap">
         <table>
             <thead>
                 <tr>
-                    <th>IDX</th><th>ID</th><th>NAME</th><th>BIRTHDAY</th><th>ADDRESS</th><th>CREATED DATE</th><th>UPDATED DATE</th><th>DELETE</th>
+                    <th>IDX</th><th>TITLE</th><th>CONTENT</th><th>CREATED TIME</th><th>UPDATED TIME</th><th>UPDATE</th><th>DELETE</th>
                 </tr>
             </thead>
             <tbody>
-				${list }
+				${memolist }
             </tbody>
         </table>
+        <a href="/login/memo" style="margin-top: 50px;">신규작성</a>
         <br>
         <a href="/login" style="margin-top: 50px;">홈으로</a>
     </section>
-    
 </body>
 </html>

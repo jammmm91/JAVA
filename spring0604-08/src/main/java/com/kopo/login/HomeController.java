@@ -99,7 +99,89 @@ public class HomeController {
 		}
 		return "message";
 	}
+	
+	// 메모
+	@RequestMapping(value = "/memolist", method = RequestMethod.GET)
+	public String memoListMethod(HttpServletRequest request, Locale locale, Model model) {
+		HttpSession session = request.getSession();
+		try {
+			boolean isLogin = (Boolean) session.getAttribute("is_login");
 
+			if (isLogin) {
+				// 세션에서 idx 가져오기
+				int idx = (Integer) session.getAttribute("user_idx");
+
+				UserDB userDB = new UserDB();
+				String htmlString = userDB.detailsMemo(idx);
+				model.addAttribute("memolist", htmlString);
+
+				return "memolist";
+			} else {
+				model.addAttribute("m1", "로그인이 필요합니다.");
+				return "message";
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			model.addAttribute("m1", "로그인이 필요합니다.");
+			return "message";
+		}
+	}
+	
+	@RequestMapping(value = "/memo", method = RequestMethod.GET)
+	public String memoMethod(HttpServletRequest request, Locale locale, Model model) {
+		HttpSession session = request.getSession();
+		try {
+			boolean isLogin = (Boolean) session.getAttribute("is_login");
+
+			if (isLogin) {
+				// 세션에서 idx 가져오기
+				int idx = (Integer) session.getAttribute("user_idx");
+
+				UserDB userDB = new UserDB();
+				Member p1 = userDB.detailsData(idx);
+				
+				model.addAttribute("original_id", p1.id);
+
+				return "memo";
+			} 
+		} catch (Exception e) {
+			e.printStackTrace();
+			model.addAttribute("m1", "오류");
+			return "message";
+		}
+		return "memo";
+	}
+
+	@RequestMapping(value = "/memo_action", method = RequestMethod.POST)
+	public String memoAction(HttpServletRequest request, Locale locale, Model model) {
+		HttpSession session = request.getSession();
+		try {
+			request.setCharacterEncoding("UTF-8");
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+		String inputTitle = request.getParameter("title");
+		String inputContent = request.getParameter("content");
+		String userId = request.getParameter("id");
+		String userpwd = request.getParameter("pwd");
+
+		UserDB db = new UserDB();
+
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+		String now = sdf.format(Calendar.getInstance().getTime());
+		int idx = (Integer) session.getAttribute("user_idx");
+
+		// 첫번째created 시간을 불러오는 메소드 추가
+		Memo memo = new Memo(inputTitle, inputContent, now, now, idx);
+		boolean isSuccess = db.insertMemo(memo);
+		if (isSuccess) {
+			model.addAttribute("m1", "메모가 저장되었습니다");
+		} else {
+			model.addAttribute("m1", "메모 저장 에러");
+		}
+		return "message";
+	}
+	
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public String listMethod(HttpServletRequest request, Locale locale, Model model) {
 		HttpSession session = request.getSession();
@@ -138,6 +220,7 @@ public class HomeController {
 
 				model.addAttribute("idx", p1.idx);
 				model.addAttribute("original_id", p1.id);
+				model.addAttribute("original_pwd", p1.pwd);
 				model.addAttribute("original_name", p1.name);
 				model.addAttribute("original_address", p1.address);
 
@@ -172,7 +255,7 @@ public class HomeController {
 		String name = request.getParameter("new_name");
 		String new_address = request.getParameter("new_address");
 		
-		boolean isSuccess = userDB.updateData2(idx, name, new_address, now);
+		boolean isSuccess = userDB.updateData2(idx, pwd, name, new_address, now);
 		if (isSuccess) {
 			model.addAttribute("m1", "정보가 수정되었습니다.");
 		} else {
@@ -224,7 +307,7 @@ public class HomeController {
 		String pwd = request.getParameter("pwd");
 
 		UserDB userDB = new UserDB();
-//		boolean isSuccess = userDB.loginDB(id, pwd);
+//		boolean isSserIdx =uccess = userDB.loginDB(id, pwd);
 		int userIdx = userDB.loginDB2(id, pwd);
 		if (userIdx > 0) {
 			HttpSession session = request.getSession();

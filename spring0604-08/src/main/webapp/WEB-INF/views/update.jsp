@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=utf-8"
-	pageEncoding="utf-8"%>
+<%@ page language="java" contentType="text/html; charset=utf-8"	pageEncoding="utf-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,7 +19,7 @@
 		    	<input type="text" name="id" placeholder="현재 아이디" value="${original_id }" disabled/>
 			</label> 
 		    <label> 현재 비밀번호: <br> 
-		    	<input type="password" name="pwd" placeholder="현재 비밀번호" />
+		    	<input type="password" name="pwd" placeholder="현재 비밀번호" value="${original_pwd }"/>
 			</label> 
 			<label> 새 비밀번호: <br> 
 				<input type="password" name="new_pwd" placeholder="새 비밀번호" />
