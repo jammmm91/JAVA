@@ -179,7 +179,7 @@ public class HomeController {
 		} else {
 			model.addAttribute("m1", "메모 저장 에러");
 		}
-		return "message";
+		return "message2";
 	}
 	
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
@@ -265,6 +265,51 @@ public class HomeController {
 		return "message";
 	}
 
+	@RequestMapping(value = "/updateMemo", method = RequestMethod.GET)
+		public String updateMemoMethod(HttpServletRequest request, @RequestParam("idx") int idx, Locale locale, Model model) {
+			HttpSession session = request.getSession();
+			int idx1 = (Integer) session.getAttribute("user_idx");
+		
+			UserDB db = new UserDB();
+			Memo p1 = db.detailsMemo1(idx);
+			Member p2 = db.detailsData(idx1);
+			
+			model.addAttribute("original_id", p2.id);
+			model.addAttribute("original_idx", p1.idx);
+			model.addAttribute("original_title", p1.title);
+			model.addAttribute("original_content", p1.content);
+		
+			return "updatememo";
+		}
+		
+
+	@RequestMapping(value = "/update_memo_action", method = RequestMethod.POST)
+	public String updateMemoAction(HttpServletRequest request, Locale locale, Model model) {
+		try {
+			request.setCharacterEncoding("utf-8");
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		String now = sdf.format(Calendar.getInstance().getTime());
+		UserDB userDB = new UserDB();
+
+		String idxString = request.getParameter("idx");
+		int idx = Integer.parseInt(idxString);
+		String title = request.getParameter("title");
+		String content = request.getParameter("content");
+				
+		boolean isSuccess = userDB.updateMemo(idx, title, content, now);
+		if (isSuccess) {
+			model.addAttribute("m1", "메모가 수정되었습니다.");
+		} else {
+			model.addAttribute("m1", "수정 에러");
+		}
+		
+		return "message2";
+	}
+	
 	@RequestMapping(value = "/delete", method = RequestMethod.GET)
 	public String delete(Locale locale, Model model, @RequestParam("idx") int idx) {
 
@@ -278,6 +323,20 @@ public class HomeController {
 		return "message";
 	}
 
+	@RequestMapping(value = "/deleteMemo", method = RequestMethod.GET)
+	public String deleteMemo(Locale locale, Model model, @RequestParam("idx") int idx) {
+
+		UserDB userDB = new UserDB();
+		boolean isSuccess = userDB.deleteMemo(idx);
+		if (isSuccess) {
+			model.addAttribute("m1", "메모가 삭제되었습니다.");
+		} else {
+			model.addAttribute("m1", "메모 삭제에 실패하였습니다.");
+		}
+		return "message2";
+	}
+
+	
 	@RequestMapping(value = "/select", method = RequestMethod.GET)
 	public String selectMethod(Locale locale, Model model) {
 		return "select";

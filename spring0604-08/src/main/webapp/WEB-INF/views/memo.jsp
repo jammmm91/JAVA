@@ -13,7 +13,7 @@
     <h1>MEMO</h1>
         <form action="memo_action" method="post">
             <label> ID <br> 
-                <input type="text" name="title"  value="${original_id }" disabled/>
+                <input type="text" name="id"  value="${original_id }" disabled/>
             </label>
             <label> TITLE <br> 
                 <input type="text" name="title" placeholder="제목을 입력하세요" />

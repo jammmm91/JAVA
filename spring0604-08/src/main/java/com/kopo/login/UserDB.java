@@ -288,8 +288,8 @@ public class UserDB {
 						+ "<td>" + content + "</td>" 
 						+ "<td>" + created + "</td>" 
 						+ "<td>" + updated + "</td>" 
-						+ "<td><a href='updatememo?idx=" + idx + "'>수정하기</a></td>"
-						+ "<td><a href='delete?idx=" + idx + "'>삭제하기</a></td>" + "</tr>";
+						+ "<td><a href='updateMemo?idx=" + idx + "'>수정하기</a></td>"
+						+ "<td><a href='deleteMemo?idx=" + idx + "'>삭제하기</a></td>" + "</tr>";
 	
 			}
 			preparedStatement.close();
@@ -300,34 +300,31 @@ public class UserDB {
 		return resultString;
 	}
 	
-//	public Member detailsDataWithId(String id) { // 특정회원 조회
-//		Member resultData = new Member();
-//		try {
-//			Class.forName("org.sqlite.JDBC");
-//			SQLiteConfig config = new SQLiteConfig();
-//			Connection connection = DriverManager.getConnection("jdbc:sqlite:/" + "c:\\tomcat\\user.db", config.toProperties());
-//
-//			String query = "SELECT * FROM users WHERE id=?";
-//			PreparedStatement preparedStatement = connection.prepareStatement(query);
-//			preparedStatement.setString(1, id);
-//			ResultSet resultSet = preparedStatement.executeQuery();
-//			if (resultSet.next()) {
-//				resultData.idx = resultSet.getInt("idx");
-//				resultData.id = resultSet.getString("id");
-//				resultData.pwd = resultSet.getString("pwd");
-//				resultData.name = resultSet.getString("name");
-//				resultData.birthday = resultSet.getString("birthday");
-//				resultData.address = resultSet.getString("address");
-//				resultData.created = resultSet.getString("created");
-//				resultData.updated = resultSet.getString("updated");
-//			}
-//			preparedStatement.close();
-//			connection.close();
-//		} catch (Exception e) {
-//		}
-//		return resultData;
-//	}
+	public Memo detailsMemo1(int idx1) { 
+		Memo resultData = new Memo();
+		try {
+			// open
+			Class.forName("org.sqlite.JDBC");
+			SQLiteConfig config = new SQLiteConfig();
+			Connection connection = DriverManager.getConnection("jdbc:sqlite:/" + "c:\\tomcat\\user.db", config.toProperties());
 
+			String query = "SELECT * FROM memo WHERE Idx=?";
+			PreparedStatement preparedStatement = connection.prepareStatement(query);
+			preparedStatement.setInt(1, idx1);
+			ResultSet resultSet = preparedStatement.executeQuery();			
+				if (resultSet.next()) {
+				resultData.idx = resultSet.getInt("idx");	
+				resultData.title = resultSet.getString("title");
+				resultData.content = resultSet.getString("content");
+			}
+			preparedStatement.close();
+			connection.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return resultData;
+	}
+	
 
 	// 수정을 위한 검증 
 	public int verificationData(String id, String password) {
@@ -354,43 +351,6 @@ public class UserDB {
 		}
 		return returnIdx;
 	}
-	
-
-//	public boolean updateData(String id, String pwd, String name, String address, String updated) { // 회원정보 갱신
-//		try {
-//			Class.forName("org.sqlite.JDBC");
-//			SQLiteConfig config = new SQLiteConfig();
-//			Connection connection = DriverManager.getConnection("jdbc:sqlite:/" + "c:\\tomcat\\user.db",
-//					config.toProperties());
-//
-//			String query = "UPDATE users SET pwd=?,name=?,address=?,updated=? WHERE id=?";
-//			PreparedStatement preparedStatement = connection.prepareStatement(query);
-//			String hasPwd = sha256(pwd);
-//			
-//			preparedStatement.setString(1, hasPwd); // pwd..
-//			preparedStatement.setString(2, name);
-//			preparedStatement.setString(3, address);
-//			preparedStatement.setString(4, updated);
-//			preparedStatement.setString(5, id);
-//
-//			int result = preparedStatement.executeUpdate();
-//			preparedStatement.close();
-//			connection.close();
-//			if (result == 1) {
-//				preparedStatement.close();
-//				connection.close();
-//				return true;
-//			} else {
-//				preparedStatement.close();
-//				connection.close();
-//				return false;
-//			}
-//
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//			return false;
-//		}
-//	}
 
 	public boolean updateData2(int idx, String pwd, String name, String address, String updated) { // 회원정보 갱신
 		try {
@@ -428,6 +388,41 @@ public class UserDB {
 		}
 	}
 	
+	// 메모 갱신
+	public boolean updateMemo(int idx, String title, String content, String updated) { 
+		try {
+			Class.forName("org.sqlite.JDBC");
+			SQLiteConfig config = new SQLiteConfig();
+			Connection connection = DriverManager.getConnection("jdbc:sqlite:/" + "c:\\tomcat\\user.db",
+					config.toProperties());
+
+			String query = "UPDATE memo SET title=?, content=?, updated=? WHERE idx=?";
+			PreparedStatement preparedStatement = connection.prepareStatement(query);
+						
+			preparedStatement.setString(1, title);
+			preparedStatement.setString(2, content);
+			preparedStatement.setString(3, updated);
+			preparedStatement.setInt(4, idx);
+
+			int result = preparedStatement.executeUpdate();
+			preparedStatement.close();
+			connection.close();
+			if (result == 1) {
+				preparedStatement.close();
+				connection.close();
+				return true;
+			} else {
+				preparedStatement.close();
+				connection.close();
+				return false;
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+	
 	// 회원정보 삭제
 	public boolean deleteData(int idx) { 
 		try {
@@ -435,6 +430,32 @@ public class UserDB {
 			SQLiteConfig config = new SQLiteConfig();
 			Connection connection = DriverManager.getConnection("jdbc:sqlite:/" + "c:\\tomcat\\user.db",config.toProperties());
 			String query = "DELETE FROM users WHERE idx=? ";
+
+			PreparedStatement preparedStatement = connection.prepareStatement(query);
+			preparedStatement.setInt(1, idx);
+			int result = preparedStatement.executeUpdate();
+
+			preparedStatement.close();
+			connection.close();
+			if (result == 1) {
+				return true;
+			} else {
+				return false;
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+	
+	// 메모 삭제
+	public boolean deleteMemo(int idx) { 
+		try {
+			Class.forName("org.sqlite.JDBC");
+			SQLiteConfig config = new SQLiteConfig();
+			Connection connection = DriverManager.getConnection("jdbc:sqlite:/" + "c:\\tomcat\\user.db",config.toProperties());
+			String query = "DELETE FROM memo WHERE idx=? ";
 
 			PreparedStatement preparedStatement = connection.prepareStatement(query);
 			preparedStatement.setInt(1, idx);

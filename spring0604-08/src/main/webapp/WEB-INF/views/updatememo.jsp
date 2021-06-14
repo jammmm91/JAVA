@@ -11,15 +11,18 @@
 <body>
     <section class="wrap">
     <h1>MEMO</h1>
-        <form action="memo_action" method="post">
+        <form action="update_memo_action" method="post">
+            <label>  
+                <input type="hidden" name="idx"  value="${original_idx }" />
+            </label>
             <label> ID <br> 
-                <input type="text" name="title"  value="${original_id }" disabled/>
+                <input type="text" name="id"  value="${original_id }" disabled/>
             </label>
             <label> TITLE <br> 
-                <input type="text" name="title" placeholder="제목을 입력하세요" />
+                <input type="text" name="title" value="${original_title }" />
             </label>
             <label> MEMO <br>  
-                <textarea type="text" name="content" cols='50' rows='10' placeholder="메모를 입력하세요"></textarea>
+                <textarea type="text" name="content" cols='50' rows='10' >${original_content }</textarea>
             </label>
             <input type="submit" value="Insert" />
             <br>
