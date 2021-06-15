@@ -1,0 +1,35 @@
+@charset "UTF-8";
+
+.wrap {
+	background: #c0c0c0;
+    width: 500px;
+    margin: 0 auto;
+    margin-top: 10px;
+    padding: 30px;
+    border: 1px solid #000000;
+}
+
+center {
+	color: white;
+	font: bold 15px "돋움체"
+}
+
+a {
+    display: inline-block;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 10px 20px;
+    border: 2px solid #fff;
+    border-radius: 5px;
+    margin: 10px 0px;
+    background: #ffffff;
+    text-align: center;
+    text-decoration: none;
+    font-weight: bold;
+    transition: all 0.4s ease;
+    font: bold 15px "돋움체"
+}
+
+a:hover, a:active {
+    background: #999;
+}
