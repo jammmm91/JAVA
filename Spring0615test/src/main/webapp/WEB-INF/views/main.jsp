@@ -19,7 +19,6 @@
         <a href="insert">입주자정보입력</a>
         <a href="list">입주자목록</a>
         <a href="statistical">입주자통계</a>
-        <a href="insert">신규회원 등록</a>
         <a href="insertApt">아파트생성</a>
         <a href="update">수정</a>
         <a href="create">테이블생성</a>
