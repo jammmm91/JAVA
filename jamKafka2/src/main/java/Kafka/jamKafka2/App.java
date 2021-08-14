@@ -1,4 +1,4 @@
-package Kafka.jamKfaka;
+package Kafka.jamKafka2;
 
 /**
  * Hello world!
